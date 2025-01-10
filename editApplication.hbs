@@ -1,0 +1,53 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col text-center">
+      <h2>Edit Application</h2>
+    </div>
+  </div>
+  <form id="editApplicationForm" onsubmit="handleEditFormSubmit(event)">
+    <div class="form-group">
+      <label for="application_status">Application Status</label>
+      <select class="form-control" id="application_status" name="application_status" required>
+        <option value="Submitted" {{#ifEquals application.application_status 'Submitted'}}selected{{/ifEquals}}>Submitted</option>
+        <option value="In Progress" {{#ifEquals application.application_status 'In Progress'}}selected{{/ifEquals}}>In Progress</option>
+        <option value="Rejected" {{#ifEquals application.application_status 'Rejected'}}selected{{/ifEquals}}>Rejected</option>
+        <option value="Accepted" {{#ifEquals application.application_status 'Accepted'}}selected{{/ifEquals}}>Accepted</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="interview_rounds">Interview Rounds</label>
+      <input type="number" class="form-control" id="interview_rounds" name="interview_rounds" value="{{application.interview_rounds}}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+  </form>
+</div>
+
+<script>
+  function handleEditFormSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(document.getElementById('editApplicationForm'));
+    const jsonData = Object.fromEntries(formData);
+
+    // Ensure interview_rounds is treated as a number
+    jsonData.interview_rounds = parseInt(jsonData.interview_rounds, 10);
+
+    fetch(`/edit_application/${{{application.application_id}}}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonData),
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/my_applications';
+      } else {
+        alert('Failed to save changes. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
+  }
+</script>

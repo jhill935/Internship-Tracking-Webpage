@@ -1,0 +1,16 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col">
+      <h2>My Applications</h2>
+    </div>
+  </div>
+  {{#each applications}}
+    {{> application }}
+  {{/each}}
+  <div class="row mt-4">
+    <div class="col text-center">
+      <button type="button" class="btn btn-primary" onclick="window.location.href='/add_application'">Add New Application</button>
+    </div>
+  </div>
+</div>
+

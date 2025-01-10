@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-sm border-bottom">
+    <div class="container">
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse"
+        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          {{#if session.user}}
+          <li class="nav-item">
+            <a class="nav-link" href="/my_applications">My Applications</a>
+          </li>
+          {{/if}}
+          <li class="nav-item">
+            <a class="nav-link" href="/find_applications">Find Applications</a>
+          </li>
+        </ul>
+        {{#if session.user}}
+        <div class="nav-item me-4">
+          <a href="/profile/{{session.user.username}}" style="text-decoration: none;">
+            <img 
+              src="{{session.user.image_url}}" 
+              style="border-radius:100%; width:32px; height:32px; object-fit: cover;"
+            >
+            {{session.user.username}}
+          </a>
+        </div>
+        <div class="nav-item me-4">
+          <a class="nav-link" href="/logout">Logout</a>
+        </div>
+        {{else}}
+        <div class="nav-item me-4">
+          <a class="nav-link" href="/login">Login</a>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+</header>

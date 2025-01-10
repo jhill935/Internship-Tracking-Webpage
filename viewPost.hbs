@@ -1,0 +1,54 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col">
+      <h2>View Post</h2>
+      <div style="max-width:600px; margin:auto;">
+        <div class="card px-2 py-2">
+          <h2>{{post.position}}</h2>
+          <div>{{post.company_name}}</div>
+          <a href="{{post.link}}">{{post.link}}</a>
+          <p class="mx-2 my-2">{{post.body}}</p>
+          <div class="my-2">
+            <a href="/profile/{{post.username}}" style="text-decoration: none;">
+              {{post.username}} <br \>
+            </a>
+            <span class="small">{{post.time_posted}}</span>
+          </div>
+        </div>
+        <hr />
+        {{#if session.user}}
+        <div class="mx-4" style="text-align: right; margin-bottom: 6vh;">
+          <form method="post" action="/add_comment/{{post.post_id}}">
+            <textarea class="form-control" placeholder="Say something.." name="comment" required></textarea>
+            <br />
+            <button class="btn btn-primary">Add Comment</button>
+          </form>
+        </div>
+        {{/if}}
+        <div class="my-4">
+          <!-- Comments -->
+          {{#each comments}}
+          {{>comment}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // functionality for deleting comments will be used in >comments partial
+  function deleteComment(commentId) {
+    if (confirm('Delete Comment?')) {
+      fetch('/remove_comment/' + commentId, {
+        method: 'DELETE'
+      }).then(response => {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          alert('Failed to delete application.' + response.status);
+        }
+      });
+    }
+  }
+</script>

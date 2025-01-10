@@ -1,0 +1,14 @@
+<div class="card px-2 py-2 mx-4 my-2">
+	<h4>
+		<a href="/profile/{{username}}" style="text-decoration:none;">{{username}}</a>
+	</h4>
+	<p>{{body}}</p>
+	{{#ifEquals @root.session.user.username username}}
+	<button 
+		class="btn btn-danger" 
+		style="position:absolute; top:0; right:0; margin:10px; padding:5px;" 
+		onclick="deleteComment({{comment_id}})"
+	>🗑️
+	</button>
+	{{/ifEquals}}
+</div>

@@ -1,0 +1,46 @@
+<div class="card mb-3" style="width: 100%;">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <h4>{{employer}}</h4>
+        <p>{{job_title}}</p>
+      </div>
+      <div class="col-md-2">
+        <h5>Status:</h5>
+        <p>{{application_status}}</p>
+      </div>
+      <div class="col-md-2">
+        <h5>Application Date:</h5>
+        <p>{{formatDate application_date}}</p>
+      </div>
+      <div class="col-md-2">
+        <h5>Salary:</h5>
+        <p>{{salary}}</p>
+      </div>
+      <div class="col-md-1">
+        <h5>Rounds:</h5>
+        <p>{{interview_rounds}}</p>
+      </div>
+      <div class="col-md-2 text-right">
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/edit_application/{{application_id}}'">Edit</button>
+        <button type="button" class="btn btn-danger" onclick="deleteApplication('{{application_id}}')">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function deleteApplication(applicationId) {
+    if (confirm('Are you sure you want to delete this application?')) {
+      fetch(`/delete_application/${applicationId}`, {
+        method: 'DELETE'
+      }).then(response => {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          alert('Failed to delete application.');
+        }
+      });
+    }
+  }
+</script>

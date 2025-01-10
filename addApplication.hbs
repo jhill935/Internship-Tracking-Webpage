@@ -1,0 +1,66 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col text-center">
+      <h2>Add New Application</h2>
+    </div>
+  </div>
+  <form id="addApplicationForm" onsubmit="handleFormSubmit(event)">
+    <div class="form-group">
+      <label for="employer">Employer</label>
+      <input type="text" class="form-control" id="employer" name="employer" required>
+    </div>
+    <div class="form-group">
+      <label for="job_title">Job Title</label>
+      <input type="text" class="form-control" id="job_title" name="job_title" required>
+    </div>
+    <div class="form-group">
+      <label for="application_date">Application Date</label>
+      <input type="date" class="form-control" id="application_date" name="application_date">
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input type="number" class="form-control" id="salary" name="salary">
+    </div>
+    <div class="form-group">
+      <label for="application_status">Application Status</label>
+      <select class="form-control" id="application_status" name="application_status" required>
+        <option value="Submitted">Submitted</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Accepted">Accepted</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="interview_rounds">Interview Rounds</label>
+      <input type="number" class="form-control" id="interview_rounds" name="interview_rounds">
+    </div>
+    <button type="submit" class="btn btn-primary">Save Application</button>
+  </form>
+</div>
+
+<script>
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(document.getElementById('addApplicationForm'));
+    const jsonData = Object.fromEntries(formData);
+
+    fetch('/save_application', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonData),
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/my_applications';
+      } else {
+        alert('Failed to save application. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    });
+  }
+</script>
