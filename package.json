@@ -1,0 +1,45 @@
+{
+  "name": "career-compass",
+  "version": "0.0.1",
+  "description": "School project for career and internship tracking web application catererd toward students",
+  "main": "./ProjectSourceCode/index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "nodemon ./ProjectSourceCode/index.js",
+    "test": "mocha ./ProjectSourceCode/test/*.spec.js",
+    "testandrun": "npm run prestart && npm run test && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Calvin-Bonomo/CSCI3308_Project.git"
+  },
+  "keywords": [
+    "node",
+    "web"
+  ],
+  "author": "The Rusty Koalas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Calvin-Bonomo/CSCI3308_Project/issues"
+  },
+  "homepage": "https://github.com/Calvin-Bonomo/CSCI3308_Project#readme",
+  "dependencies": {
+    "18": "^0.0.0",
+    "bcryptjs": "2.4.3",
+    "dotenv": "16.4.5",
+    "ejs": "3.1.10",
+    "ejs-lint": "2.0.0",
+    "express": "4.21.1",
+    "express-handlebars": "8.0.1",
+    "express-session": "1.18.1",
+    "nodemon": "3.1.7",
+    "pg-promise": "11.10.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5"
+  }
+}
